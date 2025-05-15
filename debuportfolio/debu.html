@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debapratim Pal | Portfolio</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #007bff;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #ffffff;
+      --accent-color: #0dcaf0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--accent-color);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    #mode-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 4rem 2rem;
+    }
+
+    .hero-text {
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+
+    .typed-text {
+      font-weight: bold;
+      font-size: 2rem;
+      color: var(--accent-color);
+    }
+
+    .cursor {
+      display: inline-block;
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 1px solid var(--accent-color);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .resume-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    #contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    input, textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button[type="submit"] {
+      padding: 0.75rem;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #scrollToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 0.75rem 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Typing animation
+      const typedText = document.querySelector(".typed-text");
+      const cursor = document.querySelector(".cursor");
+      const textArray = ["Debapratim Pal", "Web Developer", "Tech Enthusiast"];
+      let textArrayIndex = 0;
+      let charIndex = 0;
+
+      function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+          typedText.textContent += textArray[textArrayIndex].charAt(charIndex);
+          charIndex++;
+          setTimeout(type, 150);
+        } else {
+          setTimeout(erase, 1500);
+        }
+      }
+
+      function erase() {
+        if (charIndex > 0) {
+          typedText.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+          charIndex--;
+          setTimeout(erase, 100);
+        } else {
+          textArrayIndex = (textArrayIndex + 1) % textArray.length;
+          setTimeout(type, 500);
+        }
+      }
+
+      type();
+
+      // Dark/light mode toggle
+      const toggle = document.getElementById("mode-toggle");
+      toggle.addEventListener("click", () => {
+        document.body.dataset.theme = document.body.dataset.theme === "dark" ? "light" : "dark";
+        toggle.textContent = document.body.dataset.theme === "dark" ? "☀️" : "🌙";
+      });
+
+      // Scroll to top button
+      const scrollBtn = document.getElementById("scrollToTop");
+      window.addEventListener("scroll", () => {
+        scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
+      });
+
+      scrollBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+  </script>
+</head>
+<body data-theme="light">
+  <header>
+    <nav class="navbar">
+      <div class="logo">Debapratim Pal</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button id="mode-toggle">🌙</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home">
+    <div class="hero-text">
+      <h1>Hi, I'm <span class="typed-text"></span><span class="cursor">|</span></h1>
+      <p>Welcome to my personal portfolio website.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul class="skill-list">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>React</li>
+      <li>Python</li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Project 1</h3>
+        <p>Description of project 1.</p>
+      </div>
+      <div class="project-card">
+        <h3>Project 2</h3>
+        <p>Description of project 2.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="resume">
+    <h2>Resume</h2>
+    <a href="Debapratim_Pal_Resume.pdf" download class="resume-button">Download My Resume</a>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <form id="contact-form">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <button id="scrollToTop">↑</button>
+</body>
+</html>
